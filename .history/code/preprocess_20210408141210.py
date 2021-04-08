@@ -25,11 +25,16 @@ class Datasets():
         # For storing list of classes
         self.classes = [""] * hp.num_classes
 
+        # Mean and std for standardization
+        self.mean = np.zeros((3,))
+        self.std = np.zeros((3,))
+        self.calc_mean_and_std()
+
         # Setup data generators
         self.train_data = self.get_data(
-            os.path.join(self.data_path, "train/"), True)
+            os.path.join(self.data_path, "train/"), task == '3', True, True)
         self.test_data = self.get_data(
-            os.path.join(self.data_path, "test/"), False)
+            os.path.join(self.data_path, "test/"), task == '3', False, False)
 
     def calc_mean_and_std(self):
         """ Calculate mean and standard deviation of a sample of the
@@ -109,28 +114,72 @@ class Datasets():
 
     def preprocess_fn(self, img):
         """ Preprocess function for ImageDataGenerator. """
-        img = img / 255.
+
+        if self.task == '3':
+            img = tf.keras.applications.vgg16.preprocess_input(img)
+        else:
+            img = img / 255.
+            img = self.standardize(img)
         return img
 
-    def get_data(self, path, shuffle):
+    def custom_preprocess_fn(self, img):
+        """ Custom preprocess function for ImageDataGenerator. """
+
+        if self.task == '3':
+            img = tf.keras.applications.vgg16.preprocess_input(img)
+        else:
+            img = img / 255.
+            img = self.standardize(img)
+
+
+        # if random.random() < 0.3:
+        #     img = img + tf.random.uniform(
+        #         (hp.img_size, hp.img_size, 1),
+        #         minval=-0.1,
+        #         maxval=0.1)
+
+        return img
+
+    def get_data(self, path, is_vgg, shuffle, augment):
         """ Returns an image data generator which can be iterated
         through for images and corresponding class labels.
 
         Arguments:
             path - Filepath of the data being imported, such as
                    "../data/train" or "../data/test"
+            is_vgg - Boolean value indicating whether VGG preprocessing
+                     should be applied to the images.
             shuffle - Boolean value indicating whether the data should
                       be randomly shuffled.
+            augment - Boolean value indicating whether the data should
+                      be augmented or not.
 
         Returns:
             An iterable image-batch generator
         """
 
-        
-        data_gen = tf.keras.preprocessing.image.ImageDataGenerator(preprocessing_function=self.preprocess_fn)
+        if augment:
+            # Use the arguments of ImageDataGenerator()
+            #       to augment the data. Leave the
+            #       preprocessing_function argument as is unless
+            #       you have written your own custom preprocessing
+            #       function (see custom_preprocess_fn()).
+            #
+            # Documentation for ImageDataGenerator: https://bit.ly/2wN2EmK
+            #
+            # ============================================================
+
+            data_gen = tf.keras.preprocessing.image.ImageDataGenerator(
+                preprocessing_function=self.preprocess_fn, fill_mode="reflect", rotation_range=20, zoom_range=0.1, width_shift_range=0.1, height_shift_range=0.1)
+
+            # ============================================================
+        else:
+            # Don't modify this
+            data_gen = tf.keras.preprocessing.image.ImageDataGenerator(
+                preprocessing_function=self.preprocess_fn)
 
         # VGG must take images of size 224x224
-        img_size = hp.img_size
+        img_size = 224 if is_vgg else hp.img_size
 
         classes_for_flow = None
 

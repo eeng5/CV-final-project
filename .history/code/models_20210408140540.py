@@ -5,7 +5,7 @@ Brown University
 """
 
 import tensorflow as tf
-from tensorflow.keras.layers import Conv2D, MaxPool2D, Dropout, Flatten, Dense, BatchNormalization, AveragePooling2D
+from tensorflow.keras.layers import Conv2D, D]MaxPool2D, Dropout, Flatten, Dense, BatchNormalization, AveragePooling2D
 import hyperparameters as hp
 
 
@@ -62,7 +62,7 @@ class SimpleModel(tf.keras.Model):
         
         #Select a loss function for your network (see the documentation
         #       for tf.keras.losses)
-        return tf.keras.losses.softmax(labels, predictions, from_logits=False)
+        return tf.keras.losses.sparse_categorical_crossentropy(labels, predictions, from_logits=False)
 
 
 class ComplexModel(tf.keras.Model):
@@ -106,5 +106,6 @@ class ComplexModel(tf.keras.Model):
         
         #Select a loss function for your network (see the documentation
         #       for tf.keras.losses)
-        return tf.keras.losses.softmax(labels, predictions, from_logits=False)
+        tf.keras.losses.softmax(labels, predictions, from_logits=False)
+        return tf.keras.losses.sparse_categorical_crossentropy(labels, predictions, from_logits=False)
 

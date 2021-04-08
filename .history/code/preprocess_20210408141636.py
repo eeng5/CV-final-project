@@ -27,9 +27,9 @@ class Datasets():
 
         # Setup data generators
         self.train_data = self.get_data(
-            os.path.join(self.data_path, "train/"), True)
+            os.path.join(self.data_path, "train/"), task == '3', True, True)
         self.test_data = self.get_data(
-            os.path.join(self.data_path, "test/"), False)
+            os.path.join(self.data_path, "test/"), task == '3', False, False)
 
     def calc_mean_and_std(self):
         """ Calculate mean and standard deviation of a sample of the
@@ -109,7 +109,22 @@ class Datasets():
 
     def preprocess_fn(self, img):
         """ Preprocess function for ImageDataGenerator. """
+
+        
         img = img / 255.
+        return img
+
+    def custom_preprocess_fn(self, img):
+        """ Custom preprocess function for ImageDataGenerator. """
+
+        
+        img = img / 255.
+        # if random.random() < 0.3:
+        #     img = img + tf.random.uniform(
+        #         (hp.img_size, hp.img_size, 1),
+        #         minval=-0.1,
+        #         maxval=0.1)
+
         return img
 
     def get_data(self, path, shuffle):
@@ -119,8 +134,12 @@ class Datasets():
         Arguments:
             path - Filepath of the data being imported, such as
                    "../data/train" or "../data/test"
+            is_vgg - Boolean value indicating whether VGG preprocessing
+                     should be applied to the images.
             shuffle - Boolean value indicating whether the data should
                       be randomly shuffled.
+            augment - Boolean value indicating whether the data should
+                      be augmented or not.
 
         Returns:
             An iterable image-batch generator

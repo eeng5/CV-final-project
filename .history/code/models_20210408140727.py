@@ -5,7 +5,7 @@ Brown University
 """
 
 import tensorflow as tf
-from tensorflow.keras.layers import Conv2D, MaxPool2D, Dropout, Flatten, Dense, BatchNormalization, AveragePooling2D
+from tf.keras.layers import Conv2D, MaxPool2D, Dropout, Flatten, Dense, BatchNormalization, AveragePooling2D
 import hyperparameters as hp
 
 
