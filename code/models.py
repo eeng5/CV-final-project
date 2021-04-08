@@ -57,7 +57,15 @@ class SimpleModel(tf.keras.Model):
        ## filters: Integer, the dimensionality of the output space (i.e. the number of output filters in the convolution).
        ## kernel_size: An integer or tuple/list of 2 integers, specifying the height and width of the 2D convolution window. Can be a single integer to specify the same value for all spatial dimensions.
        ## strides: An integer or tuple/list of 2 integers, specifying the strides of the convolution along the height and width. Can be a single integer to specify the same value for all spatial dimensions. Specifying any stride value != 1 is incompatible with specifying any dilation_rate value != 1.
-        self.architecture = []
+        self.architecture = [
+            Conv2D(64, 48, 48, padding="same", activation="relu"),
+            Conv2D(124, 24, 24, padding="same", activation="relu"),
+            MaxPool2D(2),
+              
+            Conv2D(64, 3, 1, padding="same", activation="relu"),
+            Conv2D(64, 3, 1, padding="same", activation="relu"),
+            MaxPool2D(2),
+        ]
         
 
 
