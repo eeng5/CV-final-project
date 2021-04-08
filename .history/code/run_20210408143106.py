@@ -192,7 +192,7 @@ def main():
         model = SimpleModel()
         model(tf.keras.Input(shape=(hp.img_size, hp.img_size, 3)))
         checkpoint_path = "checkpoints" + os.sep + \
-            "simple_model" + os.sep + timestamp + os.sep
+            "Simple_model" + os.sep + timestamp + os.sep
         logs_path = "logs" + os.sep + "simple_model" + \
             os.sep + timestamp + os.sep
 

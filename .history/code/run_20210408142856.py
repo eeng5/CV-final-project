@@ -12,7 +12,7 @@ from datetime import datetime
 import tensorflow as tf
 from tensorflow import keras
 import hyperparameters as hp
-from models import SimpleModel, ComplexModel
+from models import simpleModel, VGGModel
 from preprocess import Datasets
 from skimage.transform import resize
 from tensorboard_utils import \
@@ -38,7 +38,7 @@ def parse_args():
         required=True,
         choices=['1', '3'], # task 1 is simpleModel and task 3 is complexModel 
         help='''Which task of the assignment to run -
-        training the SimpleModel (1), or training the ComplexModel(3).''')
+        training the simpleModel (1), or training the complexModel(3).''')
     parser.add_argument(
         '--data',
         default='..'+os.sep+'data'+os.sep,
@@ -189,7 +189,7 @@ def main():
     datasets = Datasets(ARGS.data, ARGS.task)
 
     if ARGS.task == '1':
-        model = SimpleModel()
+        model = simpleModel()
         model(tf.keras.Input(shape=(hp.img_size, hp.img_size, 3)))
         checkpoint_path = "checkpoints" + os.sep + \
             "simple_model" + os.sep + timestamp + os.sep
@@ -200,7 +200,7 @@ def main():
         model.summary()
         
     else:
-        model = ComplexModel()
+        model = complexModel()
         model(tf.keras.Input(shape=(hp.img_size, hp.img_size, 3)))
         checkpoint_path = "checkpoints" + os.sep + \
             "complex_model" + os.sep + timestamp + os.sep

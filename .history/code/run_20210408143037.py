@@ -189,7 +189,7 @@ def main():
     datasets = Datasets(ARGS.data, ARGS.task)
 
     if ARGS.task == '1':
-        model = SimpleModel()
+        model = simpleModel()
         model(tf.keras.Input(shape=(hp.img_size, hp.img_size, 3)))
         checkpoint_path = "checkpoints" + os.sep + \
             "simple_model" + os.sep + timestamp + os.sep
@@ -200,7 +200,7 @@ def main():
         model.summary()
         
     else:
-        model = ComplexModel()
+        model = complexModel()
         model(tf.keras.Input(shape=(hp.img_size, hp.img_size, 3)))
         checkpoint_path = "checkpoints" + os.sep + \
             "complex_model" + os.sep + timestamp + os.sep
