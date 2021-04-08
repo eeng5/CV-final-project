@@ -1,4 +1,0 @@
-## How To set up the data ##
-- [ ] Go to datasetup.py
-- [ ] Go to line 35, replace the location of data/train.csv to your absolute path of that file 
-- [ ] go to line 36, replace the location of data/

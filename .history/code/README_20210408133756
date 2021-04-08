@@ -1,9 +1,0 @@
-## How To set up the data ##
-- [ ] Go to datasetup.py
-- [ ] Go to line 35, replace the location of data/train.csv to your absolute path of that file 
-- [ ] go to line 36, replace the location of data/train/ to your absolute path of that directory
-- [ ] go to line 50, replace the location of data/icml_face_data.csv to your absolute path of that file 
-- [ ] go to line 51, replace the location of data/test/ to your absolute path of that directory
-- [ ] activate the cs1430 virtual environment in the root directory and run the following:
-  - [ ] "cd code"
-  - [ ] "python datasetup.py
