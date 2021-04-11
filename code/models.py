@@ -40,7 +40,7 @@ class SimpleModel(tf.keras.Model):
             Dense(256, activation="relu"),
             BatchNormalization(),
             Dropout(0.2),
-            Dense(512,  activation='relu'),
+            Dense(7,  activation='relu'),
             BatchNormalization(),
             Dropout(0.2)
         ]
