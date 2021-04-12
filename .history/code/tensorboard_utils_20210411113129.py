@@ -33,6 +33,7 @@ class ImageLabelingLogger(tf.keras.callbacks.Callback):
 
     def __init__(self, logs_path, datasets):
         super(ImageLabelingLogger, self).__init__()
+
         self.datasets = datasets
         self.task = datasets.task
         self.logs_path = logs_path

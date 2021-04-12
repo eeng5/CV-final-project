@@ -33,6 +33,7 @@ class ImageLabelingLogger(tf.keras.callbacks.Callback):
 
     def __init__(self, logs_path, datasets):
         super(ImageLabelingLogger, self).__init__()
+
         self.datasets = datasets
         self.task = datasets.task
         self.logs_path = logs_path
@@ -56,11 +57,15 @@ class ImageLabelingLogger(tf.keras.callbacks.Callback):
                 probabilities = self.model(np.array([image])).numpy()[0]
                 predict_class_idx = np.argmax(probabilities)
 
+                
                 image = np.clip(image, 0., 1.)
                 plt.imshow(image, cmap='gray')
+               
 
                 is_correct = correct_class_idx == predict_class_idx
+
                 title_color = 'g' if is_correct else 'r'
+
                 plt.title(
                     self.datasets.idx_to_class[predict_class_idx],
                     color=title_color)

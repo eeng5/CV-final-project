@@ -33,6 +33,7 @@ class ImageLabelingLogger(tf.keras.callbacks.Callback):
 
     def __init__(self, logs_path, datasets):
         super(ImageLabelingLogger, self).__init__()
+
         self.datasets = datasets
         self.task = datasets.task
         self.logs_path = logs_path
@@ -60,7 +61,9 @@ class ImageLabelingLogger(tf.keras.callbacks.Callback):
                 plt.imshow(image, cmap='gray')
 
                 is_correct = correct_class_idx == predict_class_idx
+
                 title_color = 'g' if is_correct else 'r'
+
                 plt.title(
                     self.datasets.idx_to_class[predict_class_idx],
                     color=title_color)
