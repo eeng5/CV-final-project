@@ -81,16 +81,25 @@ class ComplexModel(tf.keras.Model):
        ## kernel_size: An integer or tuple/list of 2 integers, specifying the height and width of the 2D convolution window. Can be a single integer to specify the same value for all spatial dimensions.
        ## strides: An integer or tuple/list of 2 integers, specifying the strides of the convolution along the height and width. Can be a single integer to specify the same value for all spatial dimensions. Specifying any stride value != 1 is incompatible with specifying any dilation_rate value != 1.
         self.architecture = [
-            Conv2D(64, 3, 1, padding="same", activation="relu"),
-            MaxPool2D(2),
+            Conv2D(64, 5, 1, padding="same", activation="relu"),
+            MaxPool2D(pool_size=(5,5), strides=(2,2)),
 
-            Conv2D(512, 3, 1, padding="same", activation="relu"),
-            Conv2D(124, 5, 1, padding="same", activation="relu"),
-            AveragePool2D(2),
+            Conv2D(64, 5, 1, padding="same", activation="relu"),
+            Conv2D(64, 5, 1, padding="same", activation="relu"),
+            AveragePooling2D(pool_size=(3,3), strides=(2,2)),
 
-            Conv2D(512, 3, 1, padding="same", activation="relu"),
-            Conv2D(512, 3, 1, padding="same", activation="relu"),
+            Conv2D(128, 3, 1, padding="same", activation="relu"),
+            Conv2D(128, 3, 1, padding="same", activation="relu"),
+            AveragePooling2D(pool_size=(3,3), strides=(2,2)),
 
+            Flatten(), 
+            Dense(1024, activation="relu"),
+            Dropout(0.2), 
+            Dense(1024, activation="relu"),
+            Dropout(0.2),
+            Dense(1024, activation="relu"),
+            Dropout(0.2),
+            Dense(7, activation="softmax")  
         ]
         
 
