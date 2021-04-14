@@ -1,0 +1,156 @@
+Found 114836 images belonging to 7 classes.
+Found 14356 images belonging to 7 classes.
+Model: "simple_model"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d (Conv2D)              (None, 48, 48, 64)        1792      
+_________________________________________________________________
+batch_normalization (BatchNo (None, 48, 48, 64)        256       
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 24, 24, 64)        0         
+_________________________________________________________________
+dropout (Dropout)            (None, 24, 24, 64)        0         
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 24, 24, 128)       204928    
+_________________________________________________________________
+batch_normalization_1 (Batch (None, 24, 24, 128)       512       
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 12, 12, 128)       0         
+_________________________________________________________________
+dropout_1 (Dropout)          (None, 12, 12, 128)       0         
+_________________________________________________________________
+conv2d_2 (Conv2D)            (None, 12, 12, 512)       590336    
+_________________________________________________________________
+batch_normalization_2 (Batch (None, 12, 12, 512)       2048      
+_________________________________________________________________
+max_pooling2d_2 (MaxPooling2 (None, 6, 6, 512)         0         
+_________________________________________________________________
+dropout_2 (Dropout)          (None, 6, 6, 512)         0         
+_________________________________________________________________
+conv2d_3 (Conv2D)            (None, 6, 6, 512)         2359808   
+_________________________________________________________________
+batch_normalization_3 (Batch (None, 6, 6, 512)         2048      
+_________________________________________________________________
+max_pooling2d_3 (MaxPooling2 (None, 3, 3, 512)         0         
+_________________________________________________________________
+dropout_3 (Dropout)          (None, 3, 3, 512)         0         
+_________________________________________________________________
+flatten (Flatten)            (None, 4608)              0         
+_________________________________________________________________
+dense (Dense)                (None, 256)               1179904   
+_________________________________________________________________
+batch_normalization_4 (Batch (None, 256)               1024      
+_________________________________________________________________
+dropout_4 (Dropout)          (None, 256)               0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 512)               131584    
+_________________________________________________________________
+batch_normalization_5 (Batch (None, 512)               2048      
+_________________________________________________________________
+dropout_5 (Dropout)          (None, 512)               0         
+_________________________________________________________________
+dense_2 (Dense)              (None, 7)                 3591      
+=================================================================
+Total params: 4,479,879
+Trainable params: 4,475,911
+Non-trainable params: 3,968
+_________________________________________________________________
+Done setting up image labeling logger.
+WARNING:tensorflow:sample_weight modes were coerced from
+  ...
+    to  
+  ['...']
+WARNING:tensorflow:sample_weight modes were coerced from
+  ...
+    to  
+  ['...']
+Train for 7178 steps, validate for 898 steps
+Epoch 1/30
+7177/7178 [============================>.] - ETA: 0s - loss: 1.6575 - sparse_categorical_accuracy: 0.36132021-04-13 12:33:48.229 Python[99243:7008481] ApplePersistenceIgnoreState: Existing state will not be touched. New state will be written to /var/folders/56/q_3ywshn52g254cf802z3rx80000gn/T/org.python.python.savedState
+7178/7178 [==============================] - 3444s 480ms/step - loss: 1.6575 - sparse_categorical_accuracy: 0.3613 - val_loss: 1.9168 - val_sparse_categorical_accuracy: 0.4643
+Epoch 2/30
+7178/7178 [==============================] - 2298s 320ms/step - loss: 1.4006 - sparse_categorical_accuracy: 0.4705 - val_loss: 1.3689 - val_sparse_categorical_accuracy: 0.4819
+Epoch 3/30
+7178/7178 [==============================] - 2666s 371ms/step - loss: 1.3089 - sparse_categorical_accuracy: 0.5100 - val_loss: 1.3838 - val_sparse_categorical_accuracy: 0.5172
+Epoch 4/30
+7178/7178 [==============================] - 2593s 361ms/step - loss: 1.2353 - sparse_categorical_accuracy: 0.5410 - val_loss: 1.2627 - val_sparse_categorical_accuracy: 0.5424
+Epoch 5/30
+7178/7178 [==============================] - 2301s 321ms/step - loss: 1.1860 - sparse_categorical_accuracy: 0.5622 - val_loss: 1.2147 - val_sparse_categorical_accuracy: 0.5490
+Epoch 6/30
+7178/7178 [==============================] - 2552s 356ms/step - loss: 1.1313 - sparse_categorical_accuracy: 0.5853 - val_loss: 1.2690 - val_sparse_categorical_accuracy: 0.5211
+Epoch 7/30
+7178/7178 [==============================] - 2385s 332ms/step - loss: 1.0716 - sparse_categorical_accuracy: 0.6103 - val_loss: 1.1793 - val_sparse_categorical_accuracy: 0.5799
+Epoch 8/30
+7178/7178 [==============================] - 2280s 318ms/step - loss: 1.0257 - sparse_categorical_accuracy: 0.6303 - val_loss: 1.1285 - val_sparse_categorical_accuracy: 0.5798
+Epoch 9/30
+7178/7178 [==============================] - 2227s 310ms/step - loss: 0.9792 - sparse_categorical_accuracy: 0.6492 - val_loss: 1.2242 - val_sparse_categorical_accuracy: 0.5867
+Epoch 10/30
+7178/7178 [==============================] - 2293s 319ms/step - loss: 0.9354 - sparse_categorical_accuracy: 0.6656 - val_loss: 1.1285 - val_sparse_categorical_accuracy: 0.5945
+Epoch 11/30
+7178/7178 [==============================] - 2195s 306ms/step - loss: 0.8918 - sparse_categorical_accuracy: 0.6835 - val_loss: 1.2658 - val_sparse_categorical_accuracy: 0.5784
+Epoch 12/30
+7178/7178 [==============================] - 2186s 305ms/step - loss: 0.8512 - sparse_categorical_accuracy: 0.7002 - val_loss: 1.2204 - val_sparse_categorical_accuracy: 0.6026
+Epoch 13/30
+7178/7178 [==============================] - 2219s 309ms/step - loss: 0.8044 - sparse_categorical_accuracy: 0.7189 - val_loss: 1.2088 - val_sparse_categorical_accuracy: 0.5817
+Epoch 14/30
+7178/7178 [==============================] - 2180s 304ms/step - loss: 0.7684 - sparse_categorical_accuracy: 0.7307 - val_loss: 1.1914 - val_sparse_categorical_accuracy: 0.6082
+Epoch 15/30
+7178/7178 [==============================] - 2188s 305ms/step - loss: 0.7303 - sparse_categorical_accuracy: 0.7441 - val_loss: 1.3422 - val_sparse_categorical_accuracy: 0.6009
+Epoch 16/30
+7178/7178 [==============================] - 2199s 306ms/step - loss: 0.6973 - sparse_categorical_accuracy: 0.7587 - val_loss: 1.1541 - val_sparse_categorical_accuracy: 0.6121
+Epoch 17/30
+7178/7178 [==============================] - 2204s 307ms/step - loss: 0.6721 - sparse_categorical_accuracy: 0.7679 - val_loss: 1.2826 - val_sparse_categorical_accuracy: 0.6032
+Epoch 18/30
+7178/7178 [==============================] - 2197s 306ms/step - loss: 0.6408 - sparse_categorical_accuracy: 0.7779 - val_loss: 1.2372 - val_sparse_categorical_accuracy: 0.6016
+Epoch 19/30
+7178/7178 [==============================] - 2195s 306ms/step - loss: 0.6159 - sparse_categorical_accuracy: 0.7887 - val_loss: 1.3322 - val_sparse_categorical_accuracy: 0.5998
+Epoch 20/30
+7178/7178 [==============================] - 2192s 305ms/step - loss: 0.5927 - sparse_categorical_accuracy: 0.7951 - val_loss: 1.3590 - val_sparse_categorical_accuracy: 0.5910
+Epoch 21/30
+7178/7178 [==============================] - 2191s 305ms/step - loss: 0.5696 - sparse_categorical_accuracy: 0.8054 - val_loss: 1.2713 - val_sparse_categorical_accuracy: 0.6059
+Epoch 22/30
+7178/7178 [==============================] - 2192s 305ms/step - loss: 0.5495 - sparse_categorical_accuracy: 0.8116 - val_loss: 1.2761 - val_sparse_categorical_accuracy: 0.6076
+Epoch 23/30
+7178/7178 [==============================] - 2192s 305ms/step - loss: 0.5329 - sparse_categorical_accuracy: 0.8179 - val_loss: 1.4428 - val_sparse_categorical_accuracy: 0.5950
+Epoch 24/30
+7178/7178 [==============================] - 2192s 305ms/step - loss: 0.5164 - sparse_categorical_accuracy: 0.8239 - val_loss: 1.3997 - val_sparse_categorical_accuracy: 0.5994
+Epoch 25/30
+7178/7178 [==============================] - 2196s 306ms/step - loss: 0.4950 - sparse_categorical_accuracy: 0.8310 - val_loss: 1.3892 - val_sparse_categorical_accuracy: 0.6053
+Epoch 26/30
+7178/7178 [==============================] - 2196s 306ms/step - loss: 0.4804 - sparse_categorical_accuracy: 0.8373 - val_loss: 1.3248 - val_sparse_categorical_accuracy: 0.6163
+Epoch 27/30
+7178/7178 [==============================] - 2199s 306ms/step - loss: 0.4699 - sparse_categorical_accuracy: 0.8384 - val_loss: 1.4733 - val_sparse_categorical_accuracy: 0.5950
+Epoch 28/30
+7178/7178 [==============================] - 2201s 307ms/step - loss: 0.4601 - sparse_categorical_accuracy: 0.8437 - val_loss: 1.4165 - val_sparse_categorical_accuracy: 0.6065
+Epoch 29/30
+7178/7178 [==============================] - 2202s 307ms/step - loss: 0.4482 - sparse_categorical_accuracy: 0.8499 - val_loss: 1.3593 - val_sparse_categorical_accuracy: 0.6096
+Epoch 30/30
+7178/7178 [====================
+--------------------------------------------------------------
+self.architecture = [
+            Conv2D(64, 3, 1, padding="same", activation="relu"),
+            BatchNormalization(),
+            MaxPool2D(2),
+            Dropout(0.25),
+            Conv2D(128, 5, 1, padding="same", activation="relu"),
+            BatchNormalization(),
+            MaxPool2D(2),
+            Dropout(0.25),
+            Conv2D(512, 3, 1, padding="same", activation="relu"),
+            BatchNormalization(),
+            MaxPool2D(2),
+            Dropout(0.25),
+            Conv2D(512, 3, 1, padding="same", activation="relu"),
+            BatchNormalization(),
+            MaxPool2D(2),
+            Dropout(0.25),
+            Flatten(), 
+            Dense(256, activation="relu", kernel_regularizer=regularizers.l2(0.001)),
+            BatchNormalization(),
+            Dropout(0.25),
+            Dense(512, activation="relu", kernel_regularizer=regularizers.l2(0.001)),
+            BatchNormalization(),
+            Dropout(0.25),
+            Dense(7,  activation='softmax')
+        ]

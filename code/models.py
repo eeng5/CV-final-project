@@ -7,6 +7,7 @@ Brown University
 import tensorflow as tf
 from tensorflow.keras.layers import Conv2D, MaxPool2D, Dropout, Flatten, Dense, BatchNormalization, AveragePooling2D
 import hyperparameters as hp
+from tensorflow.keras import regularizers
 
 
 class SimpleModel(tf.keras.Model):
@@ -39,10 +40,10 @@ class SimpleModel(tf.keras.Model):
             MaxPool2D(2),
             Dropout(0.25),
             Flatten(), 
-            Dense(256, activation="relu"),
+            Dense(256, activation="relu", kernel_regularizer=regularizers.l2(0.001)),
             BatchNormalization(),
             Dropout(0.25),
-            Dense(512, activation="relu"),
+            Dense(512, activation="relu", kernel_regularizer=regularizers.l2(0.001)),
             BatchNormalization(),
             Dropout(0.25),
             Dense(7,  activation='softmax')

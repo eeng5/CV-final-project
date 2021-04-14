@@ -1,6 +1,7 @@
 # CV-final-project
 ### To Train the Simple Model: ###
-```python run.py --task 1```
+```python run.py --task 1 --aug 1```  -> less filtered images in augmentation step 
+```python run.py --task 1 --aug 2```  -> more filters in augmentation step 
 
 ### To Train the Complex Model: ###
 ```python run.py --task 3```
