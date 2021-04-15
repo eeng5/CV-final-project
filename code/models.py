@@ -94,11 +94,11 @@ class ComplexModel(tf.keras.Model):
             AveragePooling2D(pool_size=(3,3), strides=(2,2)),
 
             Flatten(), 
-            Dense(1024, activation="relu"),
+            Dense(1024, activation="relu", kernel_regularizer=regularizers.l2(0.001)),
             Dropout(0.2), 
-            Dense(1024, activation="relu"),
+            Dense(1024, activation="relu", kernel_regularizer=regularizers.l2(0.001)),
             Dropout(0.2),
-            Dense(1024, activation="relu"),
+            Dense(1024, activation="relu", kernel_regularizer=regularizers.l2(0.001)),
             Dropout(0.2),
             Dense(7, activation="softmax")  
         ]

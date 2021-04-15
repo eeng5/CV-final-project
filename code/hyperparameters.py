@@ -1,5 +1,5 @@
 
-num_epochs = 30
+num_epochs = 50
 
 learning_rate = 0.01
 
