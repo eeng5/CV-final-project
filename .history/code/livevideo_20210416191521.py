@@ -40,13 +40,13 @@ EYE_AR_CONSEC_FRAMES = 10
 
 COUNTER = 0
 def createPixelArray(arr):
-    arr = list(map(int, arr.split()))
-    array = np.array(arr, dtype=np.uint8)
-    array = array.reshape((48, 48))
-    return array
+arr = list(map(int, arr.split()))
+  array = np.array(arr, dtype=np.uint8)
+  array = array.reshape((48, 48))
+  return array
 def equalize_hist(img):
-    img = cv2.equalizeHist(img)
-    return img
+  img = cv2.equalizeHist(img)
+  return img
 
 def eye_aspect_ratio(eye):
 	A = dist.euclidean(eye[1], eye[5])
