@@ -40,10 +40,10 @@ class SimpleModel(tf.keras.Model):
             MaxPool2D(2),
             Dropout(0.25),
             Flatten(), 
-            Dense(256, activation="relu", kernel_regularizer=regularizers.l2(0.001)),
+            Dense(256, activation="relu"),
             BatchNormalization(),
             Dropout(0.25),
-            Dense(512, activation="relu", kernel_regularizer=regularizers.l2(0.001)),
+            Dense(512, activation="relu"),
             BatchNormalization(),
             Dropout(0.25),
             Dense(7,  activation='softmax')
