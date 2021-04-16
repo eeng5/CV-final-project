@@ -9,8 +9,8 @@ img_size = 48
 
 preprocess_sample_size = 400
 
-max_num_weights = 10
+max_num_weights = 5
 
-batch_size = 16
+batch_size = 64
 
 num_classes = 7

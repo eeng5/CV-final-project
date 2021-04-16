@@ -70,7 +70,7 @@ def saveIMG(arr, num, folderLoc):
     im.save(filename)
 def createTrain(emotion_dict, task):
     df = pd.read_csv('/Users/Natalie/Desktop/cs1430/CV-final-project/data/train.csv') # CHANGE ME 
-    base_filename = "/Users/Natalie/Desktop/cs1430/CV-final-project/data/train/" # CHANGE ME
+    base_filename = "/Users/Natalie/Desktop/cs1430//CV-final-project/data/train/" # CHANGE ME
     for index, row in df.iterrows():
         px = row['pixels']
         emot = int(row['emotion'])
@@ -84,8 +84,8 @@ def createTrain(emotion_dict, task):
             idx +=1
             saveIMG(i, num, filename)
 def createTest(emotion_dict , task):
-    df = pd.read_csv('/Users/Natalie/Desktop/cs1430/CV-final-project/data/icml_face_data.csv') # CHANGE ME
-    base_filename = "/Users/Natalie/Desktop/cs1430/CV-final-project/data/test/" # CHANGE ME 
+    df = pd.read_csv('/home/elizabeth_wang1/icml_face_data.csv') # CHANGE ME
+    base_filename = "/home/elizabeth_wang1/CV-final-project/data/test/" # CHANGE ME 
     for index, row in df.iterrows():
         if (row[' Usage'] == "PublicTest"):
             px = row[' pixels']
