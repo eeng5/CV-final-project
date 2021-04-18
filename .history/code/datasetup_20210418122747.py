@@ -124,7 +124,13 @@ def createComplexData():
     createTrain(emot_dict, 3)
     createTest(emot_dict, 3)
 def main():
-    createSimpleData()
+    # cleanAll()
+    # print("Cleaning done")
+    emot_dict = createEmotionDict()
+    createTrain(emot_dict, 1)
+    print("Training done")
+    createTest(emot_dict, 1)
+    print("Testing done")
     
 if __name__ == '__main__':
     main()

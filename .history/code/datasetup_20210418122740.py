@@ -61,7 +61,8 @@ def augmentIMG(img, task):
         img4 = equalize_hist(img3)
         imgs.append(img4)
         img5 = cv2.bilateralFilter(img4, d=9, sigmaColor=100, sigmaSpace=100)
-        imgs.append(img5)
+        imgs.append(img5]
+    
     img6 = cv2.flip(img, 1) # flip horizontally
     imgs.append(img6)
     return imgs
@@ -124,7 +125,13 @@ def createComplexData():
     createTrain(emot_dict, 3)
     createTest(emot_dict, 3)
 def main():
-    createSimpleData()
+    # cleanAll()
+    # print("Cleaning done")
+    emot_dict = createEmotionDict()
+    createTrain(emot_dict, 1)
+    print("Training done")
+    createTest(emot_dict, 1)
+    print("Testing done")
     
 if __name__ == '__main__':
     main()

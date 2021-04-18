@@ -124,7 +124,7 @@ def createComplexData():
     createTrain(emot_dict, 3)
     createTest(emot_dict, 3)
 def main():
-    createSimpleData()
+    create
     
 if __name__ == '__main__':
     main()
