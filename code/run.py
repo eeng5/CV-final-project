@@ -24,6 +24,9 @@ from skimage.segmentation import mark_boundaries
 from matplotlib import pyplot as plt
 import numpy as np
 
+from create_results_webpage import create_results_webpage
+from helpers import get_image_paths
+
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 
@@ -161,6 +164,43 @@ def test(model, test_data):
         x=test_data,
         verbose=1,
     )
+
+    categories = ['angry', 'disgust', 'fear', 'happy', 'sad', 'surprise', 'neutral']
+    abbr_categories = ['angry', 'disgust', 'fear', 'happy', 'sad', 'surprise', 'neutral']
+    num_train_per_cat = 100
+    train_image_paths, test_image_paths, train_labels, test_labels = \
+        get_image_paths('../data/', categories, num_train_per_cat)
+    predicted_categories = model.predict(
+        x=test_data,
+        verbose=1,
+    )
+    predicted = []
+    for j in predicted_categories:
+        i = np.argmax(j)
+        if (i == 0):
+            predicted.append('angry')
+        elif (i == 1):
+            predicted.append('disgust')
+        elif (i == 2):
+            predicted.append('fear')
+        elif (i == 3):
+            predicted.append('happy')
+        elif (i == 4):
+            predicted.append('sad')
+        elif (i == 5):
+            predicted.append('surprise')
+        elif (i == 6):
+            predicted.append('neutral')
+
+    print("predicted", len(predicted))
+    print("test labels ", len(test_labels))
+    create_results_webpage( train_image_paths, \
+                            test_image_paths, \
+                            train_labels, \
+                            test_labels, \
+                            categories, \
+                            abbr_categories, \
+                            np.array(predicted))
     
 
 
