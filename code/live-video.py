@@ -16,7 +16,7 @@ from PIL import Image, ImageFont, ImageDraw
 # mp4, get all images frame by frame
 def get_frames():
     vidcap = cv2.VideoCapture('emotions_test_vid.mp4')
-    fps = vidcap.get(cv2.cv.CV_CAP_PROP_FPS)
+    fps = vidcap.get(cv2.CV_CAP_PROP_FPS)
     frames = []
     success, image = vidcap.read()
     count = 0
@@ -65,7 +65,7 @@ def main():
     sorted_imgs = []
     #(237, 230, 211)
     frames_arr = np.array(frames)
-    predictions = np.argmax(model.predict(frames_arr, axis=1)
+    predictions = np.argmax(model.predict(frames_arr, axis=1))
     for i in range(predictions.shape[0]):
         p = predictions[i]
         f = frames_arr[i]
@@ -98,6 +98,6 @@ def main():
  
     ##model(tf.keras.Imput(shape=(hp.img)))
  
-#print(1)
+print(1)
 main()
 #print('Finish!!')
