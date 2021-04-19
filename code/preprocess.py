@@ -19,10 +19,10 @@ class Datasets():
         self.data_path = data_path
         self.task = task
         self.aug = aug
-        if self.aug == '1':
-            createSimpleData()
-        else:
-            createComplexData()
+        # if self.aug == '1':
+        #     createSimpleData()
+        # else:
+        #     createComplexData()
         # Dictionaries for (label index) <--> (class name)
         self.idx_to_class = {}
         self.class_to_idx = {}

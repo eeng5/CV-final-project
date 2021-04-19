@@ -2,6 +2,9 @@ import os
 import glob
 import sys
 
+from PIL import Image
+import hyperparameters as hp
+import numpy as np
 
 def progressbar(it, prefix="", size=60, file=sys.stdout):
     count = len(it)
@@ -38,6 +41,7 @@ def get_image_paths(data_path, categories, num_train_per_cat):
     # independently for clarity and ease of modification.
     train_labels = [None] * (num_categories * num_train_per_cat)
     test_labels = [None] * (num_categories * num_train_per_cat)
+    # predicted_test_labels = [None] * (num_categories * num_train_per_cat)
 
     for i, cat in enumerate(categories):
         images = glob.glob(os.path.join(data_path, 'train', cat, '*.jpg'))
@@ -48,7 +52,14 @@ def get_image_paths(data_path, categories, num_train_per_cat):
 
         images = glob.glob(os.path.join(data_path, 'test', cat, '*.jpg'))
         for j in range(num_train_per_cat):
+            print("IMAGES", images[j])
             test_image_paths[i * num_train_per_cat + j] = images[j]
             test_labels[i * num_train_per_cat + j] = cat
+            # img = Image.open(images[j])
+            # img = img.resize((hp.img_size, hp.img_size))
+            # img = np.array(img, dtype=np.float32)
+            # img = img / 255.
+            # predictions = model.predict(img)
+            # predicted_test_labels[i * num_train_per_cat + j] = np.argmax(predictions)
 
     return train_image_paths, test_image_paths, train_labels, test_labels

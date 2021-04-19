@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href=http://fonts.googleapis.com/css?family=Nunito:300|Crimson+Text|Droid+Sans+Mono rel=stylesheet type=text/css>
+<style type="text/css">
+body {
+  margin: 0px;
+  width: 100%;
+  font-family: Crimson Text, serif;
+  background: #fcfcfc;
+}
+table td {
+  text-align: center;
+  vertical-align: middle;
+}
+h1 {
+  font-family: Nunito, sans-serif;
+  font-weight: normal;
+  font-size: 28px;
+  margin: 25px 0px 0px 0px;
+  text-transform: lowercase;
+}
+.container {
+  margin: 0px auto 0px auto;
+  width: 1160px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+
+<center>
+<h1>Scene classification results visualization</h1>
+<img src="confusion_matrix.png">
+
+<br>
+Accuracy (mean of diagonal of confusion matrix) is 0.587
+<p>
+
+<table border=0 cellpadding=4 cellspacing=1>
+<tr>
+<th>Category name</th>
+<th>Accuracy</th>
+<th colspan=2>Sample training images</th>
+<th colspan=2>Sample true positives</th>
+<th colspan=2>False positives with true label</th>
+<th colspan=2>False negatives with wrong predicted label</th>
+</tr>
+<tr>
+<td>angry</td>
+<td>0.700</td>
+<td bgcolor=LightBlue><img src="thumbnails/angry_image_10890_3.jpg" width=75 height=75></td>
+<td bgcolor=LightBlue><img src="thumbnails/angry_image_22213_1.jpg" width=75 height=75></td>
+<td bgcolor=LightGreen><img src="thumbnails/angry_image_28840_0.jpg" width=75 height=75></td>
+<td bgcolor=LightGreen><img src="thumbnails/angry_image_28733_3.jpg" width=75 height=75></td>
+<td bgcolor=LightCoral><img src="thumbnails/angry_image_28724_1.jpg" width=75 height=75><br><small>fear</small></td>
+<td bgcolor=LightCoral><img src="thumbnails/angry_image_28767_2.jpg" width=75 height=75><br><small>surprise</small></td>
+<td bgcolor=#FFBB55><img src="thumbnails/angry_image_28808_0.jpg" width=75 height=75><br><small>surprise</small></td>
+<td bgcolor=#FFBB55><img src="thumbnails/angry_image_28869_0.jpg" width=75 height=75><br><small>neutral</small></td>
+</tr>
+<tr>
+<td>disgust</td>
+<td>0.310</td>
+<td bgcolor=LightBlue><img src="thumbnails/disgust_image_9612_1.jpg" width=75 height=75></td>
+<td bgcolor=LightBlue><img src="thumbnails/disgust_image_7837_3.jpg" width=75 height=75></td>
+<td bgcolor=LightGreen><img src="thumbnails/disgust_image_28939_0.jpg" width=75 height=75></td>
+<td bgcolor=LightGreen><img src="thumbnails/disgust_image_29098_3.jpg" width=75 height=75></td>
+<td bgcolor=LightCoral></td>
+<td bgcolor=LightCoral></td>
+<td bgcolor=#FFBB55><img src="thumbnails/disgust_image_28908_0.jpg" width=75 height=75><br><small>angry</small></td>
+<td bgcolor=#FFBB55><img src="thumbnails/disgust_image_29184_2.jpg" width=75 height=75><br><small>fear</small></td>
+</tr>
+<tr>
+<td>fear</td>
+<td>0.380</td>
+<td bgcolor=LightBlue><img src="thumbnails/fear_image_18938_2.jpg" width=75 height=75></td>
+<td bgcolor=LightBlue><img src="thumbnails/fear_image_11890_3.jpg" width=75 height=75></td>
+<td bgcolor=LightGreen><img src="thumbnails/fear_image_28724_0.jpg" width=75 height=75></td>
+<td bgcolor=LightGreen><img src="thumbnails/fear_image_28804_2.jpg" width=75 height=75></td>
+<td bgcolor=LightCoral><img src="thumbnails/fear_image_28816_1.jpg" width=75 height=75><br><small>neutral</small></td>
+<td bgcolor=LightCoral><img src="thumbnails/fear_image_28730_2.jpg" width=75 height=75><br><small>surprise</small></td>
+<td bgcolor=#FFBB55><img src="thumbnails/fear_image_28859_3.jpg" width=75 height=75><br><small>neutral</small></td>
+<td bgcolor=#FFBB55><img src="thumbnails/fear_image_28724_3.jpg" width=75 height=75><br><small>neutral</small></td>
+</tr>
+<tr>
+<td>happy</td>
+<td>0.890</td>
+<td bgcolor=LightBlue><img src="thumbnails/happy_image_22235_2.jpg" width=75 height=75></td>
+<td bgcolor=LightBlue><img src="thumbnails/happy_image_9004_3.jpg" width=75 height=75></td>
+<td bgcolor=LightGreen><img src="thumbnails/happy_image_28774_0.jpg" width=75 height=75></td>
+<td bgcolor=LightGreen><img src="thumbnails/happy_image_28768_0.jpg" width=75 height=75></td>
+<td bgcolor=LightCoral><img src="thumbnails/happy_image_28793_0.jpg" width=75 height=75><br><small>surprise</small></td>
+<td bgcolor=LightCoral><img src="thumbnails/happy_image_28861_1.jpg" width=75 height=75><br><small>surprise</small></td>
+<td bgcolor=#FFBB55><img src="thumbnails/happy_image_28792_3.jpg" width=75 height=75><br><small>sad</small></td>
+<td bgcolor=#FFBB55><img src="thumbnails/happy_image_28728_1.jpg" width=75 height=75><br><small>surprise</small></td>
+</tr>
+<tr>
+<td>sad</td>
+<td>0.520</td>
+<td bgcolor=LightBlue><img src="thumbnails/sad_image_9610_2.jpg" width=75 height=75></td>
+<td bgcolor=LightBlue><img src="thumbnails/sad_image_19792_3.jpg" width=75 height=75></td>
+<td bgcolor=LightGreen><img src="thumbnails/sad_image_28771_2.jpg" width=75 height=75></td>
+<td bgcolor=LightGreen><img src="thumbnails/sad_image_28787_3.jpg" width=75 height=75></td>
+<td bgcolor=LightCoral><img src="thumbnails/sad_image_28839_1.jpg" width=75 height=75><br><small>fear</small></td>
+<td bgcolor=LightCoral><img src="thumbnails/sad_image_28779_2.jpg" width=75 height=75><br><small>angry</small></td>
+<td bgcolor=#FFBB55><img src="thumbnails/sad_image_28880_0.jpg" width=75 height=75><br><small>surprise</small></td>
+<td bgcolor=#FFBB55><img src="thumbnails/sad_image_28833_3.jpg" width=75 height=75><br><small>angry</small></td>
+</tr>
+<tr>
+<td>surprise</td>
+<td>0.420</td>
+<td bgcolor=LightBlue><img src="thumbnails/surprise_image_14549_3.jpg" width=75 height=75></td>
+<td bgcolor=LightBlue><img src="thumbnails/surprise_image_652_2.jpg" width=75 height=75></td>
+<td bgcolor=LightGreen><img src="thumbnails/surprise_image_28761_2.jpg" width=75 height=75></td>
+<td bgcolor=LightGreen><img src="thumbnails/surprise_image_28866_0.jpg" width=75 height=75></td>
+<td bgcolor=LightCoral><img src="thumbnails/surprise_image_29512_0.jpg" width=75 height=75><br><small>disgust</small></td>
+<td bgcolor=LightCoral><img src="thumbnails/surprise_image_28783_0.jpg" width=75 height=75><br><small>fear</small></td>
+<td bgcolor=#FFBB55><img src="thumbnails/surprise_image_28727_2.jpg" width=75 height=75><br><small>happy</small></td>
+<td bgcolor=#FFBB55><img src="thumbnails/surprise_image_28817_3.jpg" width=75 height=75><br><small>neutral</small></td>
+</tr>
+<tr>
+<td>neutral</td>
+<td>0.890</td>
+<td bgcolor=LightBlue><img src="thumbnails/neutral_image_22720_3.jpg" width=75 height=75></td>
+<td bgcolor=LightBlue><img src="thumbnails/neutral_image_28075_0.jpg" width=75 height=75></td>
+<td bgcolor=LightGreen><img src="thumbnails/neutral_image_28828_3.jpg" width=75 height=75></td>
+<td bgcolor=LightGreen><img src="thumbnails/neutral_image_28742_3.jpg" width=75 height=75></td>
+<td bgcolor=LightCoral><img src="thumbnails/neutral_image_28797_0.jpg" width=75 height=75><br><small>happy</small></td>
+<td bgcolor=LightCoral><img src="thumbnails/neutral_image_28859_2.jpg" width=75 height=75><br><small>fear</small></td>
+<td bgcolor=#FFBB55><img src="thumbnails/neutral_image_28778_1.jpg" width=75 height=75><br><small>sad</small></td>
+<td bgcolor=#FFBB55><img src="thumbnails/neutral_image_28815_0.jpg" width=75 height=75><br><small>happy</small></td>
+</tr>
+<tr>
+<th>Category name</th>
+<th>Accuracy</th>
+<th colspan=2>Sample training images</th>
+<th colspan=2>Sample true positives</th>
+<th colspan=2>False positives with true label</th>
+<th colspan=2>False negatives with wrong predicted label</th>
+</tr>
+</table>
+</center>
+
+
+</div>
+</body>
+</html>

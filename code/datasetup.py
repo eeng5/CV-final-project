@@ -12,7 +12,7 @@ from pathlib import Path
 def cleanTestDirs():
     emotions = ['angry', 'happy', 'disgust', 'sad', 'neutral', 'surprise', 'fear']
     for e in emotions:
-        pathy = '/Users/Natalie/Desktop/cs1430/CV-final-project/data/test/'+e
+        pathy = '/Users/eleanoreng/Desktop/CV/CV-final-project/data/test/'+e
         for f in Path(pathy).glob('*.jpg'):
             try:
             #f.unlink()
@@ -22,7 +22,7 @@ def cleanTestDirs():
 def cleanTrainDirs():
     emotions = ['angry', 'happy', 'disgust', 'sad', 'neutral', 'surprise', 'fear']
     for e in emotions:
-        pathy = '/Users/Natalie/Desktop/cs1430/CV-final-project/data/train/'+e
+        pathy = '/Users/eleanoreng/Desktop/CV/CV-final-project/data/train/'+e
         for f in Path(pathy).glob('*.jpg'):
             try:
             #f.unlink()
@@ -70,8 +70,8 @@ def saveIMG(arr, num, folderLoc):
     filename = folderLoc + "image_"+ num+".jpg"
     im.save(filename)
 def createTrain(emotion_dict, task):
-    df = pd.read_csv('/Users/Natalie/Desktop/cs1430/CV-final-project/data/train.csv') # CHANGE ME 
-    base_filename = "/Users/Natalie/Desktop/cs1430/CV-final-project/data/train/" # CHANGE ME
+    df = pd.read_csv('/Users/eleanoreng/Desktop/CV/CV-final-project/data/train.csv') # CHANGE ME 
+    base_filename = "/Users/eleanoreng/Desktop/CV/CV-final-project/data/train/" # CHANGE ME
     for index, row in df.iterrows():
         px = row['pixels']
         emot = int(row['emotion'])
@@ -85,8 +85,8 @@ def createTrain(emotion_dict, task):
             idx +=1
             saveIMG(i, num, filename)
 def createTest(emotion_dict , task):
-    df = pd.read_csv('/Users/Natalie/Desktop/cs1430/CV-final-project/data/icml_face_data.csv') # CHANGE ME
-    base_filename = "/Users/Natalie/Desktop/cs1430/CV-final-project/data/test/" # CHANGE ME 
+    df = pd.read_csv('/Users/eleanoreng/Desktop/CV/CV-final-project/data/icml_face_data.csv') # CHANGE ME
+    base_filename = "/Users/eleanoreng/Desktop/CV/CV-final-project/data/test/" # CHANGE ME 
     for index, row in df.iterrows():
         if (row[' Usage'] == "PublicTest"):
             px = row[' pixels']
