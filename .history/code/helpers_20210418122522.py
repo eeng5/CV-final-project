@@ -1,9 +1,3 @@
-"""
-Project 3 
-CS1430 - Computer Vision
-Brown University
-"""
-
 import os
 import glob
 import sys

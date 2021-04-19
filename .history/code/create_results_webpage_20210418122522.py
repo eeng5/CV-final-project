@@ -1,8 +1,3 @@
-"""
-Project 3 
-CS1430 - Computer Vision
-Brown University
-"""
 import matplotlib.pyplot as plt
 import numpy as np
 import warnings
@@ -331,3 +326,24 @@ def rescale(dims, thumbnail_height):
 	right = int(round(dims[1] * factor))
 	return (left, right)
 	
+# def main():
+# 	categories = ['angry', 'disgust', 'fear', 'happy', 'neutral', 'sad', 'surprise']
+# 	abbr_categories = ['angry', 'disgust', 'fear', 'happy', 'neutral', 'sad', 'surprise']
+# 	num_train_per_cat = 100
+# 	train_image_paths, test_image_paths, train_labels, test_labels = \
+#         get_image_paths('../data/', categories, num_train_per_cat)
+# 	random_permutation = np.random.permutation(len(test_labels))
+# 	# predicted_categories = [test_labels[i] for i in random_permutation]
+# 	predicted_categories = model.predict(
+#         x=test_data,
+#         verbose=1,
+#     )
+# 	create_results_webpage( train_image_paths, \
+#                             test_image_paths, \
+#                             train_labels, \
+#                             test_labels, \
+#                             categories, \
+#                             abbr_categories, \
+#                             predicted_categories)
+
+# main()

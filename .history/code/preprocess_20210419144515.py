@@ -6,6 +6,7 @@ from PIL import Image
 import tensorflow as tf
 
 import hyperparameters as hp
+from datasetup import createSimpleData, createComplexData
 
 class Datasets():
     """ Class for containing the training and test sets as well as
@@ -16,14 +17,12 @@ class Datasets():
     def __init__(self, data_path, task, aug):
 
         self.data_path = data_path
-        self.emotions = ['angry', 'happy', 'disgust', 'sad', 'neutral', 'surprise', 'fear']
-        self.emotion_dict = self.createEmotionDict()
         self.task = task
         self.aug = aug
         if self.aug == '1':
-            self.createSimpleData()
+            createSimpleData(data_path)
         else:
-            self.createComplexData()
+            createComplexData(data_path)
         # Dictionaries for (label index) <--> (class name)
         self.idx_to_class = {}
         self.class_to_idx = {}
@@ -39,7 +38,8 @@ class Datasets():
 
     
     def cleanTestDirs(self,):
-        for e in self.emotions:
+        emotions = ['angry', 'happy', 'disgust', 'sad', 'neutral', 'surprise', 'fear']
+        for e in emotions:
             pathy = self.data_path+'test/'+e
             pics = 1
             for f in Path(pathy).glob('*.jpg'):
@@ -53,7 +53,8 @@ class Datasets():
                         print("Error: %s : %s" % (f, e.strerror))
                         
     def cleanTrainDirs(self,):
-        for e in self.emotions:
+        emotions = ['angry', 'happy', 'disgust', 'sad', 'neutral', 'surprise', 'fear']
+        for e in emotions:
             pathy = self.data_path+'train/'+e
             for f in Path(pathy).glob('*.jpg'):
                 try:
@@ -63,29 +64,25 @@ class Datasets():
                     print("Error: %s : %s" % (f, e.strerror))
                     
     def cleanAll(self,):
-        self.cleanTestDirs()
-        self.cleanTrainDirs()
-        
+        cleanTestDirs()
+        cleanTrainDirs()
     def createPixelArray(self, arr):
         arr = list(map(int, arr.split()))
         array = np.array(arr, dtype=np.uint8)
         array = array.reshape((48, 48))
         return array
-    
     def equalize_hist(self, img):
         img = cv2.equalizeHist(img)
         return img
-    
     def showImages(self, imgs):
         _, axs = plt.subplots(1, len(imgs), figsize=(20, 20))
         axs = axs.flatten()
         for img, ax in zip(imgs, axs):
             ax.imshow(img,cmap=plt.get_cmap('gray'))
         plt.show()
-        
-    def augmentIMG(self, img, task):
+    def augmentIMG(img, task):
         imgs = [img]
-        img1 = self.equalize_hist(img)
+        img1 = equalize_hist(img)
         imgs.append(img1)
         img2 = cv2.bilateralFilter(img1, d=9, sigmaColor=75, sigmaSpace=75)
         imgs.append(img2)
@@ -95,37 +92,34 @@ class Datasets():
                     [-1.0, -1.0, -1.0]])
             img3 = cv2.filter2D(img2,-1,kernel)
             imgs.append(img3)
-            img4 = self.equalize_hist(img3)
+            img4 = equalize_hist(img3)
             imgs.append(img4)
             img5 = cv2.bilateralFilter(img4, d=9, sigmaColor=100, sigmaSpace=100)
             imgs.append(img5)
         img6 = cv2.flip(img, 1) # flip horizontally
         imgs.append(img6)
         return imgs
-    
-    def saveIMG(self, arr, num, folderLoc):
+    def saveIMG(arr, num, folderLoc):
         im = Image.fromarray(arr)
         filename = folderLoc + "image_"+ num+".jpg"
         im.save(filename)
-        
-    def createTrain(self, task):
-        path1 = self.data_path+"train.csv"
+    def createTrain(emotion_dict, task, data_path):
+        path1 = data_path+"train.csv"
         df = pd.read_csv(path1) # CHANGE ME 
         base_filename = data_path+"train/" # CHANGE ME
         for index, row in df.iterrows():
             px = row['pixels']
             emot = int(row['emotion'])
-            emot_loc = self.emotion_dict[emot]
+            emot_loc = emotion_dict[emot]
             filename = base_filename + emot_loc
-            img = self.createPixelArray(px)
-            img_arr = self.augmentIMG(img, task)
+            img = createPixelArray(px)
+            img_arr = augmentIMG(img, task)
             idx = 0
             for i in img_arr:
                 num = str(index) + "_" + str(idx)
                 idx +=1
-                self.saveIMG(i, num, filename)
-                
-    def createTest(self, task):
+                saveIMG(i, num, filename)
+    def createTest(emotion_dict , task, data_path):
         path1 = data_path +"icml_face_data.csv"
         df = pd.read_csv(path1) # CHANGE ME
         base_filename = data_path + "test/" # CHANGE ME 
@@ -133,17 +127,16 @@ class Datasets():
             if (row[' Usage'] == "PublicTest"):
                 px = row[' pixels']
                 emot = int(row['emotion'])
-                emot_loc = self.emotion_dict[emot]
+                emot_loc = emotion_dict[emot]
                 filename = base_filename + emot_loc
-                img = self.createPixelArray(px)
-                img_arr = self.augmentIMG(img, task)
+                img = createPixelArray(px)
+                img_arr = augmentIMG(img, task)
                 idx = 0
                 for i in img_arr:
                     num = str(index) + "_" + str(idx)
                     idx +=1
                     saveIMG(i, num, filename)
-                    
-    def createEmotionDict(self,):
+    def createEmotionDict():
         emotionDict = {}
         emotionDict[0]="angry/"
         emotionDict[1]="disgust/"
@@ -153,20 +146,19 @@ class Datasets():
         emotionDict[5]="surprise/"
         emotionDict[6] = "neutral/"
         return emotionDict
-    
-    def createSimpleData(self,):
-        self.cleanAll()
+    def createSimpleData(data_path):
+        cleanAll(data_path)
         print("Cleaning done")
-        self.createTrain(1)
-        print("Training Data Generation done")
-        self.createTest(1)
-        print("Testing Data Generation done")
-        
-    def createComplexData(self,):
-        self.cleanAll()
-        self.createTrain(3)
-        self.createTest(3)
-        
+        emot_dict = createEmotionDict()
+        createTrain(emot_dict, 1, data_path)
+        print("Training done")
+        createTest(emot_dict, 1, data_path)
+        print("Testing done")
+    def createComplexData(data_path):
+        cleanAll(data_path)
+        emot_dict = createEmotionDict()
+        createTrain(emot_dict, 3, data_path)
+        createTest(emot_dict, 3, data_path)
     def preprocess_fn(self, img):
         """ Preprocess function for ImageDataGenerator. """
         img = img / 255.

@@ -1,8 +1,3 @@
-"""
-Project 3 
-CS1430 - Computer Vision
-Brown University
-"""
 import matplotlib.pyplot as plt
 import numpy as np
 import warnings

@@ -6,6 +6,7 @@ from PIL import Image
 import tensorflow as tf
 
 import hyperparameters as hp
+from datasetup import createSimpleData, createComplexData
 
 class Datasets():
     """ Class for containing the training and test sets as well as
@@ -17,13 +18,12 @@ class Datasets():
 
         self.data_path = data_path
         self.emotions = ['angry', 'happy', 'disgust', 'sad', 'neutral', 'surprise', 'fear']
-        self.emotion_dict = self.createEmotionDict()
         self.task = task
         self.aug = aug
         if self.aug == '1':
-            self.createSimpleData()
+            createSimpleData(data_path)
         else:
-            self.createComplexData()
+            createComplexData(data_path)
         # Dictionaries for (label index) <--> (class name)
         self.idx_to_class = {}
         self.class_to_idx = {}
@@ -108,14 +108,14 @@ class Datasets():
         filename = folderLoc + "image_"+ num+".jpg"
         im.save(filename)
         
-    def createTrain(self, task):
+    def createTrain(self, emotion_dict, task):
         path1 = self.data_path+"train.csv"
         df = pd.read_csv(path1) # CHANGE ME 
         base_filename = data_path+"train/" # CHANGE ME
         for index, row in df.iterrows():
             px = row['pixels']
             emot = int(row['emotion'])
-            emot_loc = self.emotion_dict[emot]
+            emot_loc = emotion_dict[emot]
             filename = base_filename + emot_loc
             img = self.createPixelArray(px)
             img_arr = self.augmentIMG(img, task)
@@ -124,8 +124,7 @@ class Datasets():
                 num = str(index) + "_" + str(idx)
                 idx +=1
                 self.saveIMG(i, num, filename)
-                
-    def createTest(self, task):
+    def createTest(self, emotion_dict , task):
         path1 = data_path +"icml_face_data.csv"
         df = pd.read_csv(path1) # CHANGE ME
         base_filename = data_path + "test/" # CHANGE ME 
@@ -133,7 +132,7 @@ class Datasets():
             if (row[' Usage'] == "PublicTest"):
                 px = row[' pixels']
                 emot = int(row['emotion'])
-                emot_loc = self.emotion_dict[emot]
+                emot_loc = emotion_dict[emot]
                 filename = base_filename + emot_loc
                 img = self.createPixelArray(px)
                 img_arr = self.augmentIMG(img, task)
@@ -142,7 +141,6 @@ class Datasets():
                     num = str(index) + "_" + str(idx)
                     idx +=1
                     saveIMG(i, num, filename)
-                    
     def createEmotionDict(self,):
         emotionDict = {}
         emotionDict[0]="angry/"
@@ -157,15 +155,17 @@ class Datasets():
     def createSimpleData(self,):
         self.cleanAll()
         print("Cleaning done")
-        self.createTrain(1)
+        emot_dict = self.createEmotionDict()
+        self.createTrain(emot_dict, 1)
         print("Training Data Generation done")
-        self.createTest(1)
+        self.createTest(emot_dict, 1)
         print("Testing Data Generation done")
         
     def createComplexData(self,):
         self.cleanAll()
-        self.createTrain(3)
-        self.createTest(3)
+        emot_dict = self.createEmotionDict()
+        self.createTrain(emot_dict, 3)
+        self.createTest(emot_dict, 3)
         
     def preprocess_fn(self, img):
         """ Preprocess function for ImageDataGenerator. """
