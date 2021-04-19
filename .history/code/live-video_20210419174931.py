@@ -97,13 +97,13 @@ def main():
         sorted_imgs.append(new_img)
  
     # Creates a video from the classified frames
-    
-    out = cv2.VideoWriter('test_result_video.avi', cv2.VideoWriter_fourcc('M','J','P','G'), fps, (hp.img_size, hp.img_size))
+    out = cv2.VideoWriter('test_result_video.avi', -1, fps, (hp.img_size, hp.img_size))
     
     for img in sorted_imgs:
-        #img = np.asarray(img,dtype=np.uint8)
-        #print(img.shape)
-        out.write(img)
+        # img = np.asarray(img,dtype=np.uint8)
+        # print(img.shape)
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        out.write(gray)
     out.release()
  
     ##model(tf.keras.Imput(shape=(hp.img)))

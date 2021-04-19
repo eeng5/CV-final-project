@@ -97,7 +97,7 @@ def main():
         sorted_imgs.append(new_img)
  
     # Creates a video from the classified frames
-    
+    cv2.VideoWriter_fourcc('M','J','P','G')
     out = cv2.VideoWriter('test_result_video.avi', cv2.VideoWriter_fourcc('M','J','P','G'), fps, (hp.img_size, hp.img_size))
     
     for img in sorted_imgs:

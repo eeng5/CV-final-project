@@ -22,7 +22,7 @@ def get_frames():
     count = 0
     paths = []
     while success:
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        #image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         image = resize(image, (48, 48, 3))
         path = 'video_imgs' + os.sep + 'frame' + str(count) + '.jpg'
         paths.append(path)
@@ -97,12 +97,12 @@ def main():
         sorted_imgs.append(new_img)
  
     # Creates a video from the classified frames
-    
-    out = cv2.VideoWriter('test_result_video.avi', cv2.VideoWriter_fourcc('M','J','P','G'), fps, (hp.img_size, hp.img_size))
+    out = cv2.VideoWriter('test_result_video.avi', -1, fps, (hp.img_size, hp.img_size))
     
     for img in sorted_imgs:
-        #img = np.asarray(img,dtype=np.uint8)
-        #print(img.shape)
+        # img = np.asarray(img,dtype=np.uint8)
+        # print(img.shape)
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         out.write(img)
     out.release()
  

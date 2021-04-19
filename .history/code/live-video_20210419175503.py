@@ -97,12 +97,11 @@ def main():
         sorted_imgs.append(new_img)
  
     # Creates a video from the classified frames
-    
-    out = cv2.VideoWriter('test_result_video.avi', cv2.VideoWriter_fourcc('M','J','P','G'), fps, (hp.img_size, hp.img_size))
+    out = cv2.VideoWriter('test_result_video.avi', cv2.VideoWriter_fourcc(*'RPZA'), fps, (hp.img_size, hp.img_size))
     
     for img in sorted_imgs:
         #img = np.asarray(img,dtype=np.uint8)
-        #print(img.shape)
+        print(img.shape)
         out.write(img)
     out.release()
  
