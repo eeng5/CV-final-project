@@ -24,10 +24,8 @@ def get_frames():
     while success:
         image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         image = resize(image, (48, 48, 3))
-        path = 'video_imgs' + os.sep + 'frame' + str(count) + '.jpg'
+        path = os.sep + 'video_imgs' + os.sep + 'frame' + str(count) + '.jpg'
         paths.append(path)
-        #im = Image.fromarray(image)
-        #im.save(path)
         cv2.imwrite(path, image)    #save frame as JPEG file
         frames.append(image)
         success, image = vidcap.read()
@@ -74,8 +72,7 @@ def main():
     for i, img in enumerate(predictions):
         pred = np.argmax(img)
         p = pred
-        f = paths[i]
-        image = Image.open(f)
+        f = pathhs[i]
         caption = ''
         if (p == 0):
             caption = 'Angry'
@@ -91,8 +88,9 @@ def main():
             caption = 'Surprise'
         elif (p == 6):
             caption = 'Neutral'
-        c_font = ImageFont.truetype('/Library/Fonts/Arial.ttf', size=20)
-        new_img = ImageDraw.Draw(image)
+        c_font = ImageFont.truetype('arial.ttf', size=20)
+
+        new_img = ImageDraw.Draw(f)
         new_img.text((15,15), caption, (24, 23, 21), font=c_font)
         sorted_imgs.append(new_img)
  
@@ -100,8 +98,6 @@ def main():
     out = cv2.VideoWriter('test_result_video.avi', cv2.VideoWriter_fourcc(*'DIVX'), fps, (hp.img_size, hp.img_size))
     
     for img in sorted_imgs:
-        img = np.asarray(img,dtype=np.uint8)
-        print(img.shape)
         out.write(img)
     out.release()
  

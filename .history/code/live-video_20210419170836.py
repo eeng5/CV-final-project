@@ -91,7 +91,7 @@ def main():
             caption = 'Surprise'
         elif (p == 6):
             caption = 'Neutral'
-        c_font = ImageFont.truetype('/Library/Fonts/Arial.ttf', size=20)
+        c_font = ImageFont.truetype('arial.ttf', size=20)
         new_img = ImageDraw.Draw(image)
         new_img.text((15,15), caption, (24, 23, 21), font=c_font)
         sorted_imgs.append(new_img)
@@ -100,8 +100,6 @@ def main():
     out = cv2.VideoWriter('test_result_video.avi', cv2.VideoWriter_fourcc(*'DIVX'), fps, (hp.img_size, hp.img_size))
     
     for img in sorted_imgs:
-        img = np.asarray(img,dtype=np.uint8)
-        print(img.shape)
         out.write(img)
     out.release()
  

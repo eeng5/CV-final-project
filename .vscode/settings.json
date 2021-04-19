@@ -2,5 +2,6 @@
     "python.formatting.provider": "black",
     "git.ignoreLimitWarning": true,
     "java.completion.enabled": false,
-    "java.debug.settings.enableRunDebugCodeLens": false
+    "java.debug.settings.enableRunDebugCodeLens": false,
+    "python.pythonPath": "C:\\Users\\apowel12\\AppData\\Local\\Programs\\Python\\Python37\\python.exe"
 }

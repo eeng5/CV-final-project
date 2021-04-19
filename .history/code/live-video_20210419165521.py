@@ -20,20 +20,16 @@ def get_frames():
     frames = []
     success, image = vidcap.read()
     count = 0
-    paths = []
     while success:
         image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         image = resize(image, (48, 48, 3))
-        path = 'video_imgs' + os.sep + 'frame' + str(count) + '.jpg'
-        paths.append(path)
-        #im = Image.fromarray(image)
-        #im.save(path)
+        path = os.sep + 'video_imgs' + os.sep + 'frame' + str(count) + '.jpg'
         cv2.imwrite(path, image)    #save frame as JPEG file
         frames.append(image)
         success, image = vidcap.read()
         ##print('Read a new frame: ', success)
         count += 1
-    return frames, fps, paths
+    return frames, fps
  
 def main():
     # Get frames
@@ -41,7 +37,7 @@ def main():
     # Display the results
  
     # Creates frames from the video
-    frames, fps, paths = get_frames()
+    frames, fps = get_frames()
     
     # The path and file of the weights
     weights_str = '/Users/Natalie/Desktop/cs1430/CV-final-project/code/checkpoints/simple_model/041321-113618/your.weights.e015-acc0.6121.h5'
@@ -74,8 +70,7 @@ def main():
     for i, img in enumerate(predictions):
         pred = np.argmax(img)
         p = pred
-        f = paths[i]
-        image = Image.open(f)
+        f = frames_arr[i]
         caption = ''
         if (p == 0):
             caption = 'Angry'
@@ -91,8 +86,9 @@ def main():
             caption = 'Surprise'
         elif (p == 6):
             caption = 'Neutral'
-        c_font = ImageFont.truetype('/Library/Fonts/Arial.ttf', size=20)
-        new_img = ImageDraw.Draw(image)
+        c_font = ImageFont.truetype('Roboto-Bold.ttf', size=45)
+
+        new_img = ImageDraw.Draw(f)
         new_img.text((15,15), caption, (24, 23, 21), font=c_font)
         sorted_imgs.append(new_img)
  
@@ -100,8 +96,6 @@ def main():
     out = cv2.VideoWriter('test_result_video.avi', cv2.VideoWriter_fourcc(*'DIVX'), fps, (hp.img_size, hp.img_size))
     
     for img in sorted_imgs:
-        img = np.asarray(img,dtype=np.uint8)
-        print(img.shape)
         out.write(img)
     out.release()
  
