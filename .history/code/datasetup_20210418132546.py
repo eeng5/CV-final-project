@@ -15,7 +15,7 @@ def cleanTestDirs():
         pathy = '/Users/Natalie/Desktop/cs1430/CV-final-project/data/test/'+e
         pics = 1
         for f in Path(pathy).glob('*.jpg'):
-            if (pics <= 100):
+            if (pics < 100):
                 pics+=1
             else:
                 try:

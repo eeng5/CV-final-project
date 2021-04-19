@@ -15,14 +15,14 @@ def cleanTestDirs():
         pathy = '/Users/Natalie/Desktop/cs1430/CV-final-project/data/test/'+e
         pics = 1
         for f in Path(pathy).glob('*.jpg'):
-            if (pics <= 100):
+            if (pics < 100):
                 pics+=1
             else:
-                try:
-                #f.unlink()
-                    os.remove(f)
-                except OSError as e:
-                    print("Error: %s : %s" % (f, e.strerror))
+            try:
+            #f.unlink()
+                os.remove(f)
+            except OSError as e:
+                print("Error: %s : %s" % (f, e.strerror))
 def cleanTrainDirs():
     emotions = ['angry', 'happy', 'disgust', 'sad', 'neutral', 'surprise', 'fear']
     for e in emotions:
