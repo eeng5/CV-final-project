@@ -108,7 +108,7 @@ class Datasets():
         filename = folderLoc + "image_"+ num+".jpg"
         im.save(filename)
         
-    def createTrain(self, task):
+    def createTrain(self, emotion_dict, task):
         path1 = self.data_path+"train.csv"
         df = pd.read_csv(path1) # CHANGE ME 
         base_filename = data_path+"train/" # CHANGE ME
@@ -157,15 +157,17 @@ class Datasets():
     def createSimpleData(self,):
         self.cleanAll()
         print("Cleaning done")
-        self.createTrain(1)
+        emot_dict = self.createEmotionDict()
+        self.createTrain(emot_dict, 1)
         print("Training Data Generation done")
-        self.createTest(1)
+        self.createTest(emot_dict, 1)
         print("Testing Data Generation done")
         
     def createComplexData(self,):
         self.cleanAll()
-        self.createTrain(3)
-        self.createTest(3)
+        emot_dict = self.createEmotionDict()
+        self.createTrain(emot_dict, 3)
+        self.createTest(emot_dict, 3)
         
     def preprocess_fn(self, img):
         """ Preprocess function for ImageDataGenerator. """

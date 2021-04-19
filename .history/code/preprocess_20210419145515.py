@@ -164,8 +164,9 @@ class Datasets():
         
     def createComplexData(self,):
         self.cleanAll()
-        self.createTrain(3)
-        self.createTest(3)
+        emot_dict = self.createEmotionDict()
+        self.createTrain(emot_dict, 3)
+        self.createTest(emot_dict, 3)
         
     def preprocess_fn(self, img):
         """ Preprocess function for ImageDataGenerator. """

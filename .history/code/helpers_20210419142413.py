@@ -1,5 +1,5 @@
 """
-Project 3 
+Project  - CNNs
 CS1430 - Computer Vision
 Brown University
 """
