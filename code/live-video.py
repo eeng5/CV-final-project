@@ -65,7 +65,7 @@ def main():
     sorted_imgs = []
     #(237, 230, 211)
     frames_arr = np.array(frames)
-    predictions = np.argmax(model.predict(frames_arr))
+    predictions = np.argmax(model.predict(frames_arr, axis=1)
     for i in range(predictions.shape[0]):
         p = predictions[i]
         f = frames_arr[i]
