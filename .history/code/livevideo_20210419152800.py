@@ -14,6 +14,8 @@ import imutils
 import argparse
 import time
 import dlib
+from keras.models import load_model
+
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--save", dest="save", action = "store_true")

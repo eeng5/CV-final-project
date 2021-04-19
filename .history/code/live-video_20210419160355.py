@@ -15,15 +15,13 @@ from PIL import Image, ImageFont, ImageDraw
  
 # mp4, get all images frame by frame
 def get_frames():
-    vidcap = cv2.VideoCapture(0)
+    vidcap = cv2.VideoCapture('emotions_test_vid.mp4')
     fps = vidcap.get(cv2.CAP_PROP_FPS)
     frames = []
     success, image = vidcap.read()
     count = 0
     while success:
-        print(image.shape)
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        image = resize(image, (48, 48))
+        image = resize(image, (hp.img_size, hp.img_size, 3))
         path = os.sep + 'video_imgs' + os.sep + 'frame' + str(count) + '.jpg'
         cv2.imwrite(path, image)    #save frame as JPEG file
         frames.append(image)
@@ -54,7 +52,7 @@ def main():
  
     # Initializes a model
     model = SimpleModel()
-    model(tf.keras.Input(shape=(hp.img_size, hp.img_size)))
+    model(tf.keras.Input(shape=(hp.img_size, hp.img_size, 3)))
     model.load_weights(weights_str, by_name=False)
     
     model.compile(

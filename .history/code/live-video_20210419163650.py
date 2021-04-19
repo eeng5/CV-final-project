@@ -15,7 +15,7 @@ from PIL import Image, ImageFont, ImageDraw
  
 # mp4, get all images frame by frame
 def get_frames():
-    vidcap = cv2.VideoCapture(0)
+    vidcap = cv2.VideoCapture('emotions_test_vid.mp4')
     fps = vidcap.get(cv2.CAP_PROP_FPS)
     frames = []
     success, image = vidcap.read()
