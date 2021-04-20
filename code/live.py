@@ -32,7 +32,7 @@ def createPixelArray(arr):
 weights_str = "/Users/elizabethwang/Desktop/CS1430/CV-final-project/code/checkpoints/simple_model/041321-113618/your.weights.e015-acc0.6121.h5"
 os.chdir(sys.path[0])
 model = SimpleModel()
-model(tf.keras.Input(shape=(hp.img_size, hp.img_size)))
+model(tf.keras.Input(shape=(hp.img_size, hp.img_size,3)))
 model.load_weights(weights_str, by_name=False)
 model.compile(
     optimizer=model.optimizer,
