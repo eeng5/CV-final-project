@@ -22,26 +22,23 @@ import imutils
 import argparse
 import time
 import dlib
-from skimage import transform
-from keras.preprocessing import image
-
 def createPixelArray(arr):
-    array = image.img_to_array(arr)
-    img = np.expand_dims(img, axis = 0)
-    #array = np.array(arr, dtype=np.uint8)/225.
-    array = transform.resize(array, (48, 48, 1))
-    array = [array]
-    return array
+    array = np.array(arr, dtype=np.uint8)
+    array = array.reshape((48, 48))
+    x = np.expand_dims(array, axis=0)
+    img = x / 255.
+    return img
 weights_str = "/Users/Natalie/Desktop/cs1430/CV-final-project/code/checkpoints/simple_model/041321-113618/your.weights.e015-acc0.6121.h5"
 os.chdir(sys.path[0])
 model = SimpleModel()
-model(tf.keras.Input(shape=(hp.img_size, hp.img_size)))
+model(tf.keras.Input(shape=(hp.img_size, hp.img_size, 3)))
 model.load_weights(weights_str, by_name=False)
 model.compile(
     optimizer=model.optimizer,
     loss=model.loss_fn,
     metrics=["sparse_categorical_accuracy"],
 )
+#face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 vs = VideoStream(src=0).start()
 start = time.perf_counter()

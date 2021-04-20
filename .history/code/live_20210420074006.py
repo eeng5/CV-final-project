@@ -22,26 +22,22 @@ import imutils
 import argparse
 import time
 import dlib
-from skimage import transform
-from keras.preprocessing import image
-
 def createPixelArray(arr):
-    array = image.img_to_array(arr)
-    img = np.expand_dims(img, axis = 0)
-    #array = np.array(arr, dtype=np.uint8)/225.
-    array = transform.resize(array, (48, 48, 1))
-    array = [array]
-    return array
+    array = np.array(arr, dtype=np.uint8)
+    array = array.reshape((48, 48, 1))
+    img = array / 255.
+    return img
 weights_str = "/Users/Natalie/Desktop/cs1430/CV-final-project/code/checkpoints/simple_model/041321-113618/your.weights.e015-acc0.6121.h5"
 os.chdir(sys.path[0])
 model = SimpleModel()
-model(tf.keras.Input(shape=(hp.img_size, hp.img_size)))
+model(tf.keras.Input(shape=(hp.img_size, hp.img_size, 3)))
 model.load_weights(weights_str, by_name=False)
 model.compile(
     optimizer=model.optimizer,
     loss=model.loss_fn,
     metrics=["sparse_categorical_accuracy"],
 )
+#face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 vs = VideoStream(src=0).start()
 start = time.perf_counter()
@@ -62,8 +58,8 @@ while True:
         Y_1, Y_2 = (max(0, Y - int(0.1 * h)), min(Y + int(1.3 * h), H))
         img_cp = gray[Y_1:Y_1+48, X_1:X_1+48].copy()
         img_mod = createPixelArray(img_cp)
-        prediction = model.predict(img_mod)
-        prediction = np.argmax(prediction)
+            # prediction = model.predict(img_mod)
+            # prediction = np.argmax(prediction)
         cv2.rectangle(
             img=frame,
             pt1=(X_1, Y_1),

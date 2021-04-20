@@ -26,9 +26,8 @@ from skimage import transform
 from keras.preprocessing import image
 
 def createPixelArray(arr):
-    array = image.img_to_array(arr)
-    img = np.expand_dims(img, axis = 0)
-    #array = np.array(arr, dtype=np.uint8)/225.
+    
+    array = np.array(arr, dtype=np.uint8)/225.
     array = transform.resize(array, (48, 48, 1))
     array = [array]
     return array
