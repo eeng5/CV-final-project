@@ -87,7 +87,7 @@ while True:
         )
         cv2.putText(
             frame,
-            caption,
+            str(prediction),
             (10, frame.shape[0] - 25),
             cv2.FONT_HERSHEY_SIMPLEX,
             0.7,

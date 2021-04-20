@@ -62,7 +62,7 @@ while True:
         img_mod = createPixelArray(img_cp)
         img_mod = np.expand_dims(img_mod, 0)
         prediction = model.predict(img_mod)
-        p = np.argmax(prediction)
+        prediction = np.argmax(prediction)
         caption = ''
         if (p == 0):
             caption = 'Angry'
@@ -87,7 +87,7 @@ while True:
         )
         cv2.putText(
             frame,
-            caption,
+            str(prediction),
             (10, frame.shape[0] - 25),
             cv2.FONT_HERSHEY_SIMPLEX,
             0.7,

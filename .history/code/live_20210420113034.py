@@ -22,6 +22,19 @@ import imutils
 import argparse
 import time
 import dlib
+<<<<<<< HEAD
+from skimage import transform
+from keras.preprocessing import image
+
+def createPixelArray(arr):
+    array = image.img_to_array(arr)
+    img = np.expand_dims(img, axis = 0)
+    #array = np.array(arr, dtype=np.uint8)/225.
+    array = transform.resize(array, (48, 48, 1))
+    array = [array]
+    return array
+weights_str = "/Users/Natalie/Desktop/cs1430/CV-final-project/code/checkpoints/simple_model/041321-113618/your.weights.e015-acc0.6121.h5"
+=======
 
 def createPixelArray(arr):
     array = np.array(arr, dtype=np.uint8)
@@ -62,22 +75,7 @@ while True:
         img_mod = createPixelArray(img_cp)
         img_mod = np.expand_dims(img_mod, 0)
         prediction = model.predict(img_mod)
-        p = np.argmax(prediction)
-        caption = ''
-        if (p == 0):
-            caption = 'Angry'
-        elif (p == 1):
-            caption = 'Disgust'
-        elif (p == 2):
-            caption = 'Fear'
-        elif (p == 3):
-            caption = 'Happy'
-        elif (p == 4):
-            caption = 'Sad'
-        elif (p == 5):
-            caption = 'Surprise'
-        elif (p == 6):
-            caption = 'Neutral'
+        prediction = np.argmax(prediction)
         cv2.rectangle(
             img=frame,
             pt1=(X_1, Y_1),
@@ -87,7 +85,7 @@ while True:
         )
         cv2.putText(
             frame,
-            caption,
+            str(prediction),
             (10, frame.shape[0] - 25),
             cv2.FONT_HERSHEY_SIMPLEX,
             0.7,
