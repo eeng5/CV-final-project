@@ -22,12 +22,14 @@ import imutils
 import argparse
 import time
 import dlib
+
 def createPixelArray(arr):
     array = np.array(arr, dtype=np.uint8)
-    array = array.reshape((48, 48, 1))
+    array = cv2.resize(array, (48, 48))
     img = array / 255.
     return img
-weights_str = "/Users/Natalie/Desktop/cs1430/CV-final-project/code/checkpoints/simple_model/041321-113618/your.weights.e015-acc0.6121.h5"
+
+weights_str = "/Users/elizabethwang/Desktop/CS1430/CV-final-project/code/checkpoints/simple_model/041321-113618/your.weights.e015-acc0.6121.h5"
 os.chdir(sys.path[0])
 model = SimpleModel()
 model(tf.keras.Input(shape=(hp.img_size, hp.img_size, 3)))
@@ -49,7 +51,8 @@ out = cv2.VideoWriter(
 while True:
     frame = vs.read()
     frame = imutils.resize(frame, width=450)
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    gray = frame
+    #gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     face_coord = face_cascade.detectMultiScale(gray, 1.1, 5, minSize=(48, 48))
     for coords in face_coord:
         X, Y, w, h = coords
@@ -58,6 +61,7 @@ while True:
         Y_1, Y_2 = (max(0, Y - int(0.1 * h)), min(Y + int(1.3 * h), H))
         img_cp = gray[Y_1:Y_1+48, X_1:X_1+48].copy()
         img_mod = createPixelArray(img_cp)
+        img_mod = np.expand_dims(img_mod, 0)
         prediction = model.predict(img_mod)
         prediction = np.argmax(prediction)
         cv2.rectangle(
