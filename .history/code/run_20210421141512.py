@@ -26,7 +26,6 @@ import numpy as np
 
 from create_results_webpage import create_results_webpage
 from helpers import get_image_paths
-from live import LiveApp
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
@@ -228,8 +227,7 @@ def main():
         # i.e. python run.py --evaluate --lime-image test/Bedroom/image_003.jpg
     else:
         train(model, datasets, checkpoint_path, logs_path, init_epoch)
-    if ARGS.live:
-        la = LiveApp()
+    
 
 # Make arguments global
 ARGS = parse_args()

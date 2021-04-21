@@ -26,7 +26,7 @@ import numpy as np
 
 from create_results_webpage import create_results_webpage
 from helpers import get_image_paths
-from live import LiveApp
+from live import liveApp
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
@@ -229,7 +229,7 @@ def main():
     else:
         train(model, datasets, checkpoint_path, logs_path, init_epoch)
     if ARGS.live:
-        la = LiveApp()
+        
 
 # Make arguments global
 ARGS = parse_args()

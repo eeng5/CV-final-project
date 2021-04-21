@@ -48,7 +48,7 @@ class LiveApp:
         array = cv2.resize(array, (48, 48))
         img = array / 255.
         return img
-    def convertPredictionCaption(self, prediction):
+    def convertPredictiontoCaption(self, prediction):
         p = np.argmax(prediction)
         caption = ''
         if (p == 0):
@@ -89,8 +89,8 @@ class LiveApp:
                 img_cp = gray[Y_1:Y_1+48, X_1:X_1+48].copy()
                 img_mod = self.createPixelArray(img_cp)
                 img_mod = np.expand_dims(img_mod, 0)
-                prediction = model.predict(img_mod)
-                caption = self.convertPredictionCaption(prediction)
+                prediction = self.model.predict(img_mod)
+                caption = self.convertPredictiontoCaption(prediction)
                 cv2.rectangle(
                     img=frame,
                     pt1=(X_1, Y_1),

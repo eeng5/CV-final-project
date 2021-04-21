@@ -229,7 +229,7 @@ def main():
     else:
         train(model, datasets, checkpoint_path, logs_path, init_epoch)
     if ARGS.live:
-        la = LiveApp()
+        la = LiveApp
 
 # Make arguments global
 ARGS = parse_args()

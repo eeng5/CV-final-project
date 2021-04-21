@@ -31,7 +31,7 @@ class LiveApp:
     def __init__(self):
         os.chdir(sys.path[0])
         self.model_path= "checkpoints/simple_model/041321-113618/your.weights.e015-acc0.6121.h5"
-        self.face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+        
         doLive()
     def loadModel(self):
         model = SimpleModel()
@@ -48,27 +48,10 @@ class LiveApp:
         array = cv2.resize(array, (48, 48))
         img = array / 255.
         return img
-    def convertPredictionCaption(self, prediction):
-        p = np.argmax(prediction)
-        caption = ''
-        if (p == 0):
-            caption = 'Angry'
-        elif (p == 1):
-            caption = 'Disgust'
-        elif (p == 2):
-            caption = 'Fear'
-        elif (p == 3):
-            caption = 'Happy'
-        elif (p == 4):
-            caption = 'Sad'
-        elif (p == 5):
-            caption = 'Surprise'
-        elif (p == 6):
-            caption = 'Neutral'
-        return caption
     def doLive(self):
         model = self.loadModel()
         # load in face detector to get face in center of input image to our model
+        face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
         vs = VideoStream(src=0).start()
         start = time.perf_counter()
         data = []
@@ -80,17 +63,32 @@ class LiveApp:
             frame = vs.read()
             frame = imutils.resize(frame, width=450)
             gray = frame
-            face_coord = self.face_cascade.detectMultiScale(gray, 1.1, 5, minSize=(48, 48))
+            face_coord = face_cascade.detectMultiScale(gray, 1.1, 5, minSize=(48, 48))
             for coords in face_coord:
                 X, Y, w, h = coords
                 H, W, _ = frame.shape
                 X_1, X_2 = (max(0, X - int(w)), min(X + int(1.3 * w), W))
                 Y_1, Y_2 = (max(0, Y - int(0.1 * h)), min(Y + int(1.3 * h), H))
                 img_cp = gray[Y_1:Y_1+48, X_1:X_1+48].copy()
-                img_mod = self.createPixelArray(img_cp)
+                img_mod = createPixelArray(img_cp)
                 img_mod = np.expand_dims(img_mod, 0)
                 prediction = model.predict(img_mod)
-                caption = self.convertPredictionCaption(prediction)
+                p = np.argmax(prediction)
+                caption = ''
+                if (p == 0):
+                    caption = 'Angry'
+                elif (p == 1):
+                    caption = 'Disgust'
+                elif (p == 2):
+                    caption = 'Fear'
+                elif (p == 3):
+                    caption = 'Happy'
+                elif (p == 4):
+                    caption = 'Sad'
+                elif (p == 5):
+                    caption = 'Surprise'
+                elif (p == 6):
+                    caption = 'Neutral'
                 cv2.rectangle(
                     img=frame,
                     pt1=(X_1, Y_1),

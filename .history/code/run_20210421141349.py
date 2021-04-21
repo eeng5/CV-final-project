@@ -26,7 +26,6 @@ import numpy as np
 
 from create_results_webpage import create_results_webpage
 from helpers import get_image_paths
-from live import LiveApp
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
@@ -226,10 +225,11 @@ def main():
         # TODO: change the image path to be the image of your choice by changing
         # the lime-image flag when calling run.py to investigate
         # i.e. python run.py --evaluate --lime-image test/Bedroom/image_003.jpg
+        path = ARGS.data + os.sep + ARGS.lime_image
+        LIME_explainer(model, path, datasets.preprocess_fn)
     else:
         train(model, datasets, checkpoint_path, logs_path, init_epoch)
-    if ARGS.live:
-        la = LiveApp()
+
 
 # Make arguments global
 ARGS = parse_args()

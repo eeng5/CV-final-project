@@ -48,24 +48,6 @@ class LiveApp:
         array = cv2.resize(array, (48, 48))
         img = array / 255.
         return img
-    def convertPredictionCaption(self, prediction):
-        p = np.argmax(prediction)
-        caption = ''
-        if (p == 0):
-            caption = 'Angry'
-        elif (p == 1):
-            caption = 'Disgust'
-        elif (p == 2):
-            caption = 'Fear'
-        elif (p == 3):
-            caption = 'Happy'
-        elif (p == 4):
-            caption = 'Sad'
-        elif (p == 5):
-            caption = 'Surprise'
-        elif (p == 6):
-            caption = 'Neutral'
-        return caption
     def doLive(self):
         model = self.loadModel()
         # load in face detector to get face in center of input image to our model
@@ -90,7 +72,22 @@ class LiveApp:
                 img_mod = self.createPixelArray(img_cp)
                 img_mod = np.expand_dims(img_mod, 0)
                 prediction = model.predict(img_mod)
-                caption = self.convertPredictionCaption(prediction)
+                p = np.argmax(prediction)
+                caption = ''
+                if (p == 0):
+                    caption = 'Angry'
+                elif (p == 1):
+                    caption = 'Disgust'
+                elif (p == 2):
+                    caption = 'Fear'
+                elif (p == 3):
+                    caption = 'Happy'
+                elif (p == 4):
+                    caption = 'Sad'
+                elif (p == 5):
+                    caption = 'Surprise'
+                elif (p == 6):
+                    caption = 'Neutral'
                 cv2.rectangle(
                     img=frame,
                     pt1=(X_1, Y_1),

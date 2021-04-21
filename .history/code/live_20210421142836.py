@@ -89,7 +89,7 @@ class LiveApp:
                 img_cp = gray[Y_1:Y_1+48, X_1:X_1+48].copy()
                 img_mod = self.createPixelArray(img_cp)
                 img_mod = np.expand_dims(img_mod, 0)
-                prediction = model.predict(img_mod)
+                prediction = self.model.predict(img_mod)
                 caption = self.convertPredictionCaption(prediction)
                 cv2.rectangle(
                     img=frame,
