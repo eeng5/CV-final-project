@@ -1,4 +1,11 @@
 # CV-final-project
+## How To set up the data ##
+- [ ] go to https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data?select=fer2013.tar.gz 
+- [ ] create a gaggle account, agree to terms of use, and download icml_face_data.csv and train.csv
+- [ ] move icml_face_data.csv and train.csv into the data folder in our repo
+- [ ] activate the virtual environment then run 
+```python3 run.py --generate-data```
+
 ## USE OUR VIRTUAL ENVIRONMENT ##
 ### To activate the virtual environment ###
 ``` cd code ```

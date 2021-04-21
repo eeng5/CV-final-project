@@ -145,7 +145,7 @@ class Datasets():
                 for i in img_arr:
                     num = str(index) + "_" + str(idx)
                     idx +=1
-                    self.saveIMG(i, num, filename)
+                    saveIMG(i, num, filename)
                     
     def createEmotionDict(self,):
         emotionDict = {}

@@ -186,7 +186,7 @@ def main():
     if ARGS.generate_data:
         datasets = Datasets(ARGS.data, '1', '1', 1)
     else:
-        datasets = Datasets(ARGS.data, '1', '1', 0)
+        datasets = Datasets(ARGS.data, '1', 1, 0)
     print("Data set up done")
     if ARGS.task:
         if ARGS.task == '1':

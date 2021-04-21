@@ -6,12 +6,6 @@ from PIL import Image
 import tensorflow as tf
 
 import hyperparameters as hp
-from pathlib import Path
-import pandas as pd
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
-import cv2
-import glob
 
 class Datasets():
     """ Class for containing the training and test sets as well as
@@ -52,9 +46,9 @@ class Datasets():
             for f in Path(pathy).glob('*.jpg'):
                 try:
                     #f.unlink()
-                    os.remove(f)
-                except OSError as e:
-                    print("Error: %s : %s" % (f, e.strerror))
+                        os.remove(f)
+                    except OSError as e:
+                        print("Error: %s : %s" % (f, e.strerror))
                         
     def cleanTrainDirs(self,):
         for e in self.emotions:
@@ -113,9 +107,9 @@ class Datasets():
         im.save(filename)
         
     def createTrain(self, task):
-        path1 = self.data_path+"/train.csv"
+        path1 = self.data_path+"train.csv"
         df = pd.read_csv(path1) # CHANGE ME 
-        base_filename = self.data_path+"/train/" # CHANGE ME
+        base_filename = data_path+"train/" # CHANGE ME
         for index, row in df.iterrows():
             px = row['pixels']
             emot = int(row['emotion'])
@@ -130,9 +124,9 @@ class Datasets():
                 self.saveIMG(i, num, filename)
                 
     def createTest(self, task):
-        path1 = self.data_path +"/icml_face_data.csv"
+        path1 = data_path +"icml_face_data.csv"
         df = pd.read_csv(path1) # CHANGE ME
-        base_filename = self.data_path + "/test/" # CHANGE ME 
+        base_filename = data_path + "test/" # CHANGE ME 
         for index, row in df.iterrows():
             if (row[' Usage'] == "PublicTest"):
                 px = row[' pixels']
@@ -145,7 +139,7 @@ class Datasets():
                 for i in img_arr:
                     num = str(index) + "_" + str(idx)
                     idx +=1
-                    self.saveIMG(i, num, filename)
+                    saveIMG(i, num, filename)
                     
     def createEmotionDict(self,):
         emotionDict = {}

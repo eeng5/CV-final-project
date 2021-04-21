@@ -115,7 +115,7 @@ class Datasets():
     def createTrain(self, task):
         path1 = self.data_path+"/train.csv"
         df = pd.read_csv(path1) # CHANGE ME 
-        base_filename = self.data_path+"/train/" # CHANGE ME
+        base_filename = self.data_path+"train/" # CHANGE ME
         for index, row in df.iterrows():
             px = row['pixels']
             emot = int(row['emotion'])
@@ -132,7 +132,7 @@ class Datasets():
     def createTest(self, task):
         path1 = self.data_path +"/icml_face_data.csv"
         df = pd.read_csv(path1) # CHANGE ME
-        base_filename = self.data_path + "/test/" # CHANGE ME 
+        base_filename = self.data_path + "test/" # CHANGE ME 
         for index, row in df.iterrows():
             if (row[' Usage'] == "PublicTest"):
                 px = row[' pixels']
@@ -145,7 +145,7 @@ class Datasets():
                 for i in img_arr:
                     num = str(index) + "_" + str(idx)
                     idx +=1
-                    self.saveIMG(i, num, filename)
+                    saveIMG(i, num, filename)
                     
     def createEmotionDict(self,):
         emotionDict = {}

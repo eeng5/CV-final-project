@@ -184,9 +184,9 @@ def main():
     # Run script from location of run.py
     os.chdir(sys.path[0])
     if ARGS.generate_data:
-        datasets = Datasets(ARGS.data, '1', '1', 1)
+        datasets = Datasets(ARGS.data, 1, 1, 1)
     else:
-        datasets = Datasets(ARGS.data, '1', '1', 0)
+        datasets = Datasets(ARGS.data, ARGS.task, ARGS.aug, 0)
     print("Data set up done")
     if ARGS.task:
         if ARGS.task == '1':
